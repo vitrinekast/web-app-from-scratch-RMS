@@ -1,12 +1,12 @@
 # web-app-from-scratch-RMS
 Web App From Scratch CMD
 
-Voordelen framework
-- Binnen no time een basis voor de applicatie
-- Met een basis kennis kun je veel complexe functies uitvoeren
--
+Voordelen Framework
+- binnen no time heb je een basis voor je applicatie staan
+- Met een basis kennis kun je snel veel complexere functies uitvoeren
 
-Nadelen framework
-- Snelheid
-- formaat
-- Vergt kennis van het framework
+Nadelen Framework
+- Kan een stuk trager zijn
+- Formaat
+- Kennis van het framework is vereist
+- veel functies die je mogelijk niet gebruikt.
