@@ -2,8 +2,9 @@
 Web App From Scratch CMD
 
 Voordelen single page app
-Geen pagina laden
+- Geen pagina laden
+
 
 Nadelen single page app
-Seo is lastiger
-Gebruiker moet javascript aan hebbrn staan
+- Seo is lastiger
+- Gebruiker moet javascript aan hebben staan
