@@ -7,26 +7,28 @@
 			routes.init();
 			console.log("app.init()")
 		}
-	}
+	};
 
 	var routes = {
 		init : function () {
 			console.log("routes.init()");
-			this.addEventListener("hashchange", sections.toggle(window.location.hash))
+			window.addEventListener("hashchange", function(event) {
+				sections.toggle(window.location.hash);
+			});
 
 		}
-	}
+	};
 
 	var sections = {
 		toggle: function(route) {
 			console.log("sections.toggle(route)"+ route );
+			document.querySelector("section:not("+route+")").classList.remove('active');
+			document.querySelector(route).classList.add('active');
 		}
-	}
+	};
 
 	app.init();
 
 
 })();
 
-// comma's?
-// wat is init
