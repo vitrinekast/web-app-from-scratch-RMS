@@ -22,7 +22,10 @@
 	var sections = {
 		toggle: function(route) {
 			console.log("sections.toggle(route)"+ route );
-			document.querySelector("section:not("+route+")").classList.remove('active');
+			var sections = document.querySelectorAll("section:not(" + route + ")");
+			for(var i = 0; i < sections.length; i++) {
+				sections[i].classList.remove('active');
+			}
 			document.querySelector(route).classList.add('active');
 		}
 	};
