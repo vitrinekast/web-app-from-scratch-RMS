@@ -26,7 +26,8 @@
 			for(var i = 0; i < sections.length; i++) {
 				sections[i].classList.remove('active');
 			}
-			document.querySelector(route).classList.add('active');
+			var activePage = document.querySelector(route);
+			activePage.classList.add('active');
 		}
 	};
 
