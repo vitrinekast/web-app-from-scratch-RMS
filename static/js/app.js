@@ -50,8 +50,14 @@
 
   var food = {
     init: function(){
+      
+      //added a object with headers
+var request = {
+    url: 'http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken',
+    headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json" }
+}
 
-      microAjax("http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken", function(data){
+      microAjax(request, function(data){
         var data = JSON.parse(data);
         var context = {
           count: data.count,
