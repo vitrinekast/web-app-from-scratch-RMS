@@ -57,7 +57,7 @@ var request = {
     headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json" }
 }
 
-      microAjax(request, function(data){
+      microAjax("https://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken", function(data){debugger;
         var data = JSON.parse(data);
         var context = {
           count: data.count,
