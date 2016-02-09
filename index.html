@@ -7,43 +7,34 @@
 </head>
 <body>
 	<h1>opdracht 1</h1>
-	<!-- 3 Secties
-	- startscherm
-	- lijst met front end best practices
-	- navigatie (verwijst naar bovenste 2 met een id)
-	 -->
+	<nav>
+		<ul>
+			<li><a href="#start">Start</a></li>
+			<li><a href="#info">Info</a></li>
+			<li><a href="#over">Over</a></li>
+		</ul>
+	</nav>
+	<main>
+		<!-- hier komt je template terecht -->
+	</main>
+	
 
-	<ul>
-		<li><a href="#een">Een</a></li>
-		<li><a href="#twee">Twee</a></li>
-		<li><a href="#drie">Drie</a></li>
-	</ul>
 
-    <main>
-        <section id="een" class="active">
-            <h2>Start</h2>
-        </section>
-        <section id="twee">
-            <h2>Best Practices</h2>
-            <ul>
-                <li>Don't use global variables/objects</li>
-                <li>Declare variables at top of scope</li>
-                <li>Use short clear meaningful names (English)</li>
-                <li>Work in strict mode</li>
-                <li>camelCase your code if(code != Constructor || CONSTANTS)</li>
-                <li>Place external scripts at the bottom of the page</li>
-                <li>Indent your code</li>
-            </ul>
+   	<script id="start-template" type="text/x-handlebars-template">
+  			<p>{{recipesTitle}}</p>
+  			<h2>{{count}}</h2>
+	</script>
+	<script id="info-template" type="text/x-handlebars-template">
+  			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+	</script>
+	<script id="over-template" type="text/x-handlebars-template">
+  			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+	</script>
 
-        </section>
-        <section id="drie">
-            <h2>Wat een mooie web app...</h2>
-        </section>
-    </main>
-    <script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>
-    <script type="text/javascript" src="static/js/microajax.minified.js"></script>
-
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="static/js/microajax.minified.js" type="text/javascript"></script>
+    <script src="static/js/routie.min.js" type="text/javascript"></script>
+	<script src="static/js/handlebars-v4.0.5.js" type="text/javascript"></script>
 	<script type="text/javascript" src="static/js/app.js"></script>
 </body>
 </html>

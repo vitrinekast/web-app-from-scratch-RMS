@@ -1,50 +1,71 @@
 (function () {
-	"use strict"
+  "use strict"
 
-	console.log('app is gestart')
-	var app = {
-		init : function () {
-			routes.init();
-			echoNest.init();
-			console.log("app.init()")
-		}
-	};
+  console.log('app is gestart')
+  var app = {
+    init : function () {
+      console.log("app.init()");
 
-	var routes = {
-		init : function () {
-			console.log("routes.init()");
-			window.addEventListener("hashchange", function(event) {
-				sections.toggle(window.location.hash);
-			});
+      routie({
+        'start' : function() {
+          food.init()
+        },
+        'twee' : function() {
+         var context = {
+            "city": "London",
+            "street": "Baker Street",
+            "number": "221B"
+          };
+          templateSelection.templateSelect(window.location.hash, context);
+        },
+        'drie' : function() {
+          var context = {
+            "city": "London",
+            "street": "Baker Street",
+            "number": "221B"
+          };
+          templateSelection.templateSelect(window.location.hash, context);
+        },
+        '*' : function() {
+          var context = {
+            "city": "London",
+            "street": "Baker Street",
+            "number": "221B"
+          };
+          templateSelection.templateSelect(window.location.hash, context);
+        }
+      })
+    }
+  };
 
-		}
-	};
-	http://developer.echonest.com/api/v4/artist/blogs
-	var echoNest = {
-		init : function () {
-			var name = "Boards of Canada"
-			microAjax("http://developer.echonest.com/api/v4/artist/similar?api_key=ZIWFRUOZRUL9D67JZ&name=" + name, function (data) {
-                data = JSON.parse(data);
-               
-                
-                console.log(data)
-            });
-		}
-	}
-	
-	
-	var sections = {
-		toggle: function(route) {
-			console.log("sections.toggle(route)"+ route );
-			var sections = document.querySelectorAll("section:not(" + route + ")");
-			for(var i = 0; i < sections.length; i++) {
-				sections[i].classList.remove('active');
-			}
-			document.querySelector(route).classList.add('active');
-		}
-	};
+  
+  var templateSelection = {
+    templateSelect : function (route, context) {
+      var theTemplateScript = $(""+route+"-template").html();
+      var theTemplate = Handlebars.compile(theTemplateScript);
+      var theCompiledHtml = theTemplate(context);
+      $('main').html(theCompiledHtml);
+    }
+  }
 
-	app.init();
+  var food = {
+    init: function(){
+
+      microAjax("http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken", function(data){
+        var data = JSON.parse(data);
+        var context = {
+          count: data.count,
+          recipesTitle: data.recipes[0].title
+        }
+      
+      });
+      templateSelection.templateSelect(window.location.hash, context);
+
+    }
+    }
+  
+ 
+  app.init();
 
 
 })();
