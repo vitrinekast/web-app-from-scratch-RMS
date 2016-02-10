@@ -7,8 +7,11 @@
       console.log("app.init()");
 
       routie({
-        'start' : function() {
-          food.init()
+        'list' : function() {
+          beer.style()
+        },
+        'detail-1' :function() {
+          beer.styleID()
         },
         'info' : function() {
          var context = {
@@ -41,34 +44,68 @@
     }
   }
 
-  var food = {
-    init: function(){
-      
-      //added a object with headers
-      var requestUrl = "http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken"
-var request = {
-    url: requestUrl,
-    credential : ' OAuth ' + '{!GETSESSIONID()}',
-    headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json","SalesforceProxy-Endpoint": "request.url", "Authorization": "request.credential", "X-User-Agent": "MyClient"}
-}
-
-      microAjax(request, function(data){
+  var beer = {
+    style: function(){
+      var requestURL = "https://api.brewerydb.com/v2/styles?key=504db67d6c37be210d33ce3a0ab0169b&format=json";
+      microAjax(requestURL, function(data) {
+        console.log('start request beer styles');
         var data = JSON.parse(data);
-       
         var context = {
-          recipes: data.recipes,
-          count: data.count,
-          recipesTitle: data.recipes[0].title
-        }
-        console.log(data, context);
-      templateSelection.templateSelect(window.location.hash, context);
+          name: data.data[1].name
+      }
       
-      });
+       
+      templateSelection.templateSelect(window.location.hash, data);
+
+      })
+    },
+    styleID: function() {
+      var requestURL = "https://api.brewerydb.com/v2/style/3?key=504db67d6c37be210d33ce3a0ab0169b&format=json";
+      microAjax(requestURL, function(data) {
+        console.log('start request beer styles');
+        var data = JSON.parse(data);
+        var context = {
+          name: data.data[1].name
+      }
+      
+       console.log("yo" + data.name)
+      templateSelection.templateSelect(detail, data);
+
+      })
+    }
+
+
+  }
+
+
+      
+    //   //added a object with headers
+    //   var requestUrl = "https://api.brewerydb.com/v2/beer/oeGSxs?key=504db67d6c37be210d33ce3a0ab0169b&format=json"
+    //   var request = {
+    //     url: requestUrl,
+    //     credential : ' OAuth ' + '{!GETSESSIONID()}',
+    //     headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json","SalesforceProxy-Endpoint": "request.url", "Authorization": "request.credential", "X-User-Agent": "MyClient"}
+    //   }
+
+
+    //   microAjax(request.url, function(data){
+    //     console.log('go')
+    //     // request.setRequestHeader('Connection', 'close');
+    //     var data = JSON.parse(data);
+       
+    //     var context = {
+    //       name: data.data.name,
+         
+    //     }
+    //     console.log(data, context);
+    //   templateSelection.templateSelect(window.location.hash, context);
+      
+    //   });
 
    
 
-    }
-    }
+    // }
+    // }
   
  
   app.init();

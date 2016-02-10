@@ -9,7 +9,7 @@
 	<h1>opdracht 1</h1>
 	<nav>
 		<ul>
-			<li><a href="#start">Start</a></li>
+			<li><a href="#list">Beer List</a></li>
 			<li><a href="#info">Info</a></li>
 			<li><a href="#over">Over</a></li>
 		</ul>
@@ -20,13 +20,18 @@
 	
 
 
-   	<script id="start-template" type="text/x-handlebars-template">
-
-   		{{#each recipes}}
-   		<p>ja</p>
+   	<script id="list-template" type="text/x-handlebars-template">
+   		<ul>
+   		{{#each data}}
+			<li><a href="#detail-{{id}}">{{name}}</a></li>
    		{{/each}}
-  			<p>{{recipesTitle}}</p>
-  			<h2>{{count}}</h2>
+   		</ul>
+   	
+   		
+	</script>
+	<script id="detail-template" type="text/x-handlebars-template">
+	<h1>detail</h1>
+		<p>{{name}}</p>
 	</script>
 	<script id="info-template" type="text/x-handlebars-template">
   			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
