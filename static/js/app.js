@@ -10,23 +10,15 @@
         'start' : function() {
           food.init()
         },
-        'twee' : function() {
+        'info' : function() {
          var context = {
-            "city": "London",
+            "city": "Rotterdam",
             "street": "Baker Street",
             "number": "221B"
           };
           templateSelection.templateSelect(window.location.hash, context);
         },
-        'drie' : function() {
-          var context = {
-            "city": "London",
-            "street": "Baker Street",
-            "number": "221B"
-          };
-          templateSelection.templateSelect(window.location.hash, context);
-        },
-        '*' : function() {
+        'over' : function() {
           var context = {
             "city": "London",
             "street": "Baker Street",
@@ -34,6 +26,7 @@
           };
           templateSelection.templateSelect(window.location.hash, context);
         }
+        
       })
     }
   };
@@ -54,18 +47,24 @@
       //added a object with headers
 var request = {
     url: 'http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken',
-    headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json" }
+    credential : ' OAuth ' + '{!GETSESSIONID()}',
+    headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json","SalesforceProxy-Endpoint": "request.url", "Authorization": "request.credential", "X-User-Agent": "MyClient"}
 }
 
-      microAjax("https://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken", function(data){debugger;
+      microAjax(request, function(data){
         var data = JSON.parse(data);
+       
         var context = {
+          recipes: data.recipes,
           count: data.count,
           recipesTitle: data.recipes[0].title
         }
+        console.log(data, context);
+      templateSelection.templateSelect(window.location.hash, context);
       
       });
-      templateSelection.templateSelect(window.location.hash, context);
+
+   
 
     }
     }
