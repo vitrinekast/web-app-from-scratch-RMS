@@ -45,8 +45,9 @@
     init: function(){
       
       //added a object with headers
+      var requestUrl = "http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken"
 var request = {
-    url: 'http://food2fork.com/api/search?key=efddf9c1cff2a075b4ad2d08ea06d2f4&q=shredded%20chicken',
+    url: requestUrl,
     credential : ' OAuth ' + '{!GETSESSIONID()}',
     headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json","SalesforceProxy-Endpoint": "request.url", "Authorization": "request.credential", "X-User-Agent": "MyClient"}
 }
