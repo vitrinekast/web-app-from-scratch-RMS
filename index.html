@@ -19,19 +19,36 @@
 	</main>
 	
 
-
    	<script id="list-template" type="text/x-handlebars-template">
+   	<h1>list template</h1>
+   	{{name}}
    		<ul>
    		{{#each data}}
-			<li><a href="#detail-{{id}}">{{name}}</a></li>
+			
+			<li><a href="#{{id}}">{{name}}</a></li>
+			
    		{{/each}}
    		</ul>
    	
    		
 	</script>
 	<script id="detail-template" type="text/x-handlebars-template">
-	<h1>detail</h1>
-		<p>{{name}}</p>
+	<h1>{{data.name}}</h1>
+	<img src="{{data.labels.icon}}" alt="" />
+	<p class="beerDescription">{{data.description}} </p>
+	<h2>Style: <span>{{data.style.name}} </span></h2>
+	<p class="styleDescription">{{data.style.description}} </p>
+	<h3>details</h3>
+	<ul>
+
+	<li> IBU: <span>{{#if data.ibu}}{{data.ibu}}{{else}}N/A{{/if}}</span></li>
+	<li> ABV: <span>{{#if data.abv}}{{data.abv}}%{{else}}N/A{{/if}}</span></li>
+	<li> SRM: <span style="color: #{{data.srm.hex}}">{{#if data.srm}}{{data.srm.name}}{{else}}N/A{{/if}}</span></li>
+	<li> OG: <span>{{#if data.og}}{{data.og}}{{else}}N/A{{/if}}</span></li>
+		
+	</ul>
+	
+	
 	</script>
 	<script id="info-template" type="text/x-handlebars-template">
   			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>

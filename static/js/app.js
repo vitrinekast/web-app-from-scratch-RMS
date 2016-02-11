@@ -8,18 +8,18 @@
 
       routie({
         'list' : function() {
-          beer.style()
+          var endPoint = "/beers?availableId=1&";
+          beer.getStyle(endPoint, 'list');
+          
         },
-        'detail-1' :function() {
-          beer.styleID()
-        },
+        
         'info' : function() {
          var context = {
             "city": "Rotterdam",
             "street": "Baker Street",
             "number": "221B"
           };
-          templateSelection.templateSelect(window.location.hash, context);
+          templateSelection.templateSelect('info', context);
         },
         'over' : function() {
           var context = {
@@ -27,7 +27,16 @@
             "street": "Baker Street",
             "number": "221B"
           };
-          templateSelection.templateSelect(window.location.hash, context);
+          templateSelection.templateSelect('over', context);
+        },
+        ':id' :function() {
+          var id = window.location.hash;
+          if( id.charAt(0) === '#' ) {
+            id = id.slice( 1 )}
+          var endPoint = "/beer/" + id + "?";
+          console.log(endPoint);
+          beer.getStyle(endPoint, "detail");
+          
         }
         
       })
@@ -35,79 +44,43 @@
   };
 
   
-  var templateSelection = {
-    templateSelect : function (route, context) {
-      var theTemplateScript = $(""+route+"-template").html();
-      var theTemplate = Handlebars.compile(theTemplateScript);
-      var theCompiledHtml = theTemplate(context);
-      $('main').html(theCompiledHtml);
-    }
-  }
+  
 
   var beer = {
-    style: function(){
-      var requestURL = "https://api.brewerydb.com/v2/styles?key=504db67d6c37be210d33ce3a0ab0169b&format=json";
-      microAjax(requestURL, function(data) {
-        console.log('start request beer styles');
-        var data = JSON.parse(data);
-        var context = {
-          name: data.data[1].name
-      }
-      
-       
-      templateSelection.templateSelect(window.location.hash, data);
+    baseURL: "https://api.brewerydb.com/v2",
+    apiKEY: "504db67d6c37be210d33ce3a0ab0169b",
 
-      })
-    },
-    styleID: function() {
-      var requestURL = "https://api.brewerydb.com/v2/style/3?key=504db67d6c37be210d33ce3a0ab0169b&format=json";
-      microAjax(requestURL, function(data) {
-        console.log('start request beer styles');
-        var data = JSON.parse(data);
+    getStyle : function(endPoint, template) {
+      var requestUrl = beer.baseURL + endPoint + "key=" + beer.apiKEY + "&format=json";
+      console.log(requestUrl);
+      microAjax(requestUrl, function(data) {
+        data = JSON.parse(data);
+        console.log("start looking for" + endPoint);
+        
         var context = {
-          name: data.data[1].name
-      }
+          
+        };
+        console.log(data)
+        templateSelection.templateSelect(template, data);
+        
+        
       
-       console.log("yo" + data.name)
-      templateSelection.templateSelect(detail, data);
-
-      })
+      });
     }
 
+  };
+  
+  var templateSelection = {
+    templateSelect : function (route, context) {
+      console.log(context)
+      var source = $("#"+route+"-template").html();
+      var template = Handlebars.compile(source);
+      console.log(context.currentPage)
+      $("main").html(template(context))
 
+      }
   }
 
-
-      
-    //   //added a object with headers
-    //   var requestUrl = "https://api.brewerydb.com/v2/beer/oeGSxs?key=504db67d6c37be210d33ce3a0ab0169b&format=json"
-    //   var request = {
-    //     url: requestUrl,
-    //     credential : ' OAuth ' + '{!GETSESSIONID()}',
-    //     headers: { "X-Mashape-Key": '<required>', "Accept" : "application/json","SalesforceProxy-Endpoint": "request.url", "Authorization": "request.credential", "X-User-Agent": "MyClient"}
-    //   }
-
-
-    //   microAjax(request.url, function(data){
-    //     console.log('go')
-    //     // request.setRequestHeader('Connection', 'close');
-    //     var data = JSON.parse(data);
-       
-    //     var context = {
-    //       name: data.data.name,
-         
-    //     }
-    //     console.log(data, context);
-    //   templateSelection.templateSelect(window.location.hash, context);
-      
-    //   });
-
-   
-
-    // }
-    // }
-  
- 
   app.init();
 
 
