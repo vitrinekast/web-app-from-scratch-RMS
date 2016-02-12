@@ -10,7 +10,7 @@
 	<nav>
 		<ul>
 			<li><a href="#list">Beer List</a></li>
-			<li><a href="#info">Info</a></li>
+			<li><a href="#amsterdam">Amsterdam</a></li>
 			<li><a href="#over">Over</a></li>
 		</ul>
 	</nav>
@@ -18,7 +18,18 @@
 		<!-- hier komt je template terecht -->
 	</main>
 	
-
+	<script id="amsterdam-template" type="text/x-handlebars-template">
+	<h1>Amsterdam</h1>
+	<p>{{picked.data.name}}</p>
+	<p>{{picked.name}}</p>
+	<ul>
+		{{#each picked}}
+				<p>iets</p>
+				<li>{{name}}</li>
+			
+		{{/each}}
+	</ul>
+	</script>
    	<script id="list-template" type="text/x-handlebars-template">
    	<h1>list template</h1>
    	{{name}}
@@ -36,8 +47,6 @@
 	<h1>{{data.name}}</h1>
 	<img src="{{data.labels.icon}}" alt="" />
 	<p class="beerDescription">{{data.description}} </p>
-	<h2>Style: <span>{{data.style.name}} </span></h2>
-	<p class="styleDescription">{{data.style.description}} </p>
 	<h3>details</h3>
 	<ul>
 
@@ -47,6 +56,10 @@
 	<li> OG: <span>{{#if data.og}}{{data.og}}{{else}}N/A{{/if}}</span></li>
 		
 	</ul>
+	<h2>Style: <span>{{data.style.name}} </span></h2>
+	<p class="styleDescription">{{data.style.description}} </p>
+	<h4>3 other {{data.style.name}} beers<h4>
+	
 	
 	
 	</script>
@@ -57,7 +70,8 @@
   			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
 	</script>
 
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    
+    <script src="static/js/underscore-min.js" type='text/javascript'></script>
     <script src="static/js/microajax.minified.js" type="text/javascript"></script>
     <script src="static/js/routie.min.js" type="text/javascript"></script>
 	<script src="static/js/handlebars-v4.0.5.js" type="text/javascript"></script>
