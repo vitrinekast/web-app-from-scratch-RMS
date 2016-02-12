@@ -22,6 +22,7 @@
           if( id.charAt(0) === '#' ) {
             id = id.slice( 1 )
           };
+
           var endPoint = "/beer/" + id + "?";
           beer.getBeer(endPoint, "detail");
         }
@@ -38,17 +39,21 @@
       var requestUrl = "https://api.brewerydb.com/v2" + endPoint + "&key=" + beer.apiKEY + "&format=json";
       beer.request(requestUrl, template);
     },
+
     getList : function (template) {
       var requestUrl = "https://api.brewerydb.com/v2/beers?availableId=1&key=" + beer.apiKEY + "&format=json";
       beer.request(requestUrl, template);
     },
+
     getAmsterdam : function (template) {
-      var requestUrl = "https://api.brewerydb.com/v2/search?q=amsterdam&type=beer&key=" + beer.apiKEY + "&format=json"
+      var requestUrl = "https://api.brewerydb.com/v2/search?q=amsterdam&type=beer&key=" + beer.apiKEY + "&format=json";
       
       microAjax(requestUrl, function(data) {
-          var data = JSON.parse(data);
+
+        var data = JSON.parse(data);
         
-        console.log(requestUrl)
+        console.log(requestUrl);
+
         var picked = _.map(data, function (items) {
                     return _.pick(items, 'name', 'id');
         });
@@ -57,7 +62,7 @@
           
           return ~obj.name.toLowerCase().indexOf("amsterdam");
           
-        })
+        });
 
         
        
@@ -65,13 +70,15 @@
       })
 
     },
+
     request : function (requestUrl, template) {
       console.log("request URL is" + requestUrl);
       microAjax(requestUrl, function(data) {
         data = JSON.parse(data);
         templateSelection.templateSelect(template, data);
       })
-    },
+    }
+    
   };
   
   var templateSelection = {
@@ -79,7 +86,7 @@
       var main = document.querySelector("main");
       var source = document.querySelector("#"+route+"-template").innerHTML;
       var template = Handlebars.compile(source);
-      main.innerHTML = template(context);
+      var main.innerHTML = template(context); //Because of 'use strict' u should declare vars.
 
       }
   }
