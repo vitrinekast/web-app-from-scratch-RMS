@@ -46,7 +46,7 @@
       var requestUrl = "https://api.brewerydb.com/v2/search?q=amsterdam&type=beer&key=" + beer.apiKEY + "&format=json"
       
       microAjax(requestUrl, function(data) {
-       
+          var data = JSON.parse(data);
         
         console.log(requestUrl)
         var picked = _.map(data, function (items) {
@@ -54,14 +54,14 @@
         });
 
         var filtered = _.filter(data.data, function(obj) {
-          console.log(obj.name.toLowerCase().indexOf("amsterdam"));
+          
           return ~obj.name.toLowerCase().indexOf("amsterdam");
           
         })
 
-        console.log(picked)
+        
        
-        templateSelection.templateSelect(template, picked);
+        templateSelection.templateSelect(template, data);
       })
 
     },
