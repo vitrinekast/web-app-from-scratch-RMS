@@ -1,8 +1,52 @@
-/*style*/
-
-section {
-	display: none;
+body {
+	margin: 0 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.active {
-	display:block;
+
+nav {
+	
+	background-color: #3498db;
+	color:white;
+}
+nav ul {
+	list-style-type: none;
+	padding: 1rem;
+	margin: 0 0;
+	text-align: center;
+}
+nav ul li {
+	display:inline-block;
+	border-left:1px solid white;
+	padding:0 0;
+	margin: 0 0;
+
+
+}
+nav ul li:first-of-type {
+	border-left: none;
+}
+nav ul li a {
+	text-decoration: none;
+	color:white;
+	
+	padding:.5rem 2rem;
+	display: block;
+	transition:.2s ease-in-out;
+
+}
+nav ul li:hover {
+	background-color: #74B1DB
+}
+main {
+	padding:1rem 4rem;
+}
+main img {
+	display:inline-block;
+}
+.waiting-gif {
+	position: absolute;
+	left:50%;
+	top:50%;
+	width:5em;
+	height:5em;
 }

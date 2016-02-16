@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-	
+	<h1>opdracht 1</h1>
 	<nav>
 		<ul>
 			<li><a href="#list">Beer List</a></li>
@@ -17,31 +17,27 @@
 	<main>
 		<!-- hier komt je template terecht -->
 	</main>
-
-	<script id="waiting-template" type="text/x-handlebars-template">
-	<img src="static/img/ajax-loader.gif" height="16" width="16" alt="waiting..." class="waiting-gif" >
-
-	</script>
-
+	
 	<script id="amsterdam-template" type="text/x-handlebars-template">
 	<h1>Amsterdam</h1>
 	
 	<ul>
 		{{#each data}}
-				<li><a href="#{{id}}">{{name}}</a></li>
+				
+				<li>{{name}}</li>
 			
 		{{/each}}
 	</ul>
 	</script>
    	<script id="list-template" type="text/x-handlebars-template">
-   	<h1>alle bieren</h1>
+   	<h1>list template</h1>
+   	{{name}}
    		<ul>
    		{{#each data}}
 			
 			<li><a href="#{{id}}">{{name}}</a></li>
 			
    		{{/each}}
-   		
    		</ul>
    	
    		
@@ -62,11 +58,7 @@
 	<h2>Style: <span>{{data.style.name}} </span></h2>
 	<p class="styleDescription">{{data.style.description}} </p>
 	<h4>3 other {{data.style.name}} beers<h4>
-	<ul>
-	{{#each moreData}}
-		<li><a href="#{{id}}">{{name}}</a></li>
-	{{/each}}
-	</ul>
+	
 	
 	
 	</script>

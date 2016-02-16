@@ -1,79 +1,82 @@
-(function () {
-  "use strict"
+// TODO: 
+// - automatische startpagina (dus als de hash niks is)
+// loading gif
+// gestures
+// functionele animatie
+// code naar modules
+// styles
 
-  console.log('app is gestart')
-  
-  var app = {
+(function () {
+  "use strict";
+
+  console.log('app is gestart');
+
+  var launcher = {
 
     init : function () {
-      console.log("app.init()");
+      console.log("launcher.init()");
       
       routie({
         'list' : function() {
-          beer.getList('list');
+          beer.getFullBeerList('list', 'beers?availableId=1');
         },
         
         'amsterdam' : function() {
-          beer.getAmsterdam('amsterdam')
+          beer.getFullBeerList('amsterdam', 'search?q=amsterdam&type=beer');
         },
 
         ':id' :function() {
           var id = window.location.hash;
           if( id.charAt(0) === '#' ) {
-            id = id.slice( 1 )
-          };
+            id = id.slice( 1 );
+          }
           var endPoint = "/beer/" + id + "?";
-          beer.getBeer(endPoint, "detail");
+          beer.getSingleBeer("detail", endPoint);
         }
         
       });
     }
   };
-
+// dit moest misschien een andere naam zijn ipv beer. denk aan MVC
   var beer = {
     baseURL: "https://api.brewerydb.com/v2",
-    apiKEY: "504db67d6c37be210d33ce3a0ab0169b",
-
-    getBeer : function(endPoint, template) {
-      var requestUrl = "https://api.brewerydb.com/v2" + endPoint + "&key=" + beer.apiKEY + "&format=json";
-      beer.request(requestUrl, template);
+    apiKEY: "c242e13bd62778ab51790bf22fd04269",
+    getFullBeerList : function(template, request) {
+      var requestUrl = "https://api.brewerydb.com/v2/" + request + "&key=" + beer.apiKEY + "";
+      beer.request(requestUrl, template, false);
     },
-    getList : function (template) {
-      var requestUrl = "https://api.brewerydb.com/v2/beers?availableId=1&key=" + beer.apiKEY + "&format=json";
-      beer.request(requestUrl, template);
-    },
-    getAmsterdam : function (template) {
-      var requestUrl = "https://api.brewerydb.com/v2/search?q=amsterdam&type=beer&key=" + beer.apiKEY + "&format=json"
-      
-      microAjax(requestUrl, function(data) {
-          var data = JSON.parse(data);
-        
-        console.log(requestUrl)
-        var picked = _.map(data, function (items) {
-                    return _.pick(items, 'name', 'id');
-        });
-
-        var filtered = _.filter(data.data, function(obj) {
-          
-          return ~obj.name.toLowerCase().indexOf("amsterdam");
-          
-        })
-
-        
-       
-        templateSelection.templateSelect(template, data);
-      })
+    getSingleBeer : function (template, request) {
+      // hoe zat eht met request in een request?
+      var requestUrl = "https://api.brewerydb.com/v2/" + request + "&key=" + beer.apiKEY + "";
+      beer.request(requestUrl, template, true);
 
     },
-    request : function (requestUrl, template) {
-      console.log("request URL is" + requestUrl);
+    request : function (requestUrl, template, single) {
+      console.log("request URL is " + requestUrl);
       microAjax(requestUrl, function(data) {
         data = JSON.parse(data);
-        templateSelection.templateSelect(template, data);
+        
+        if(single === false) {
+          templateSelection.templateSelect(template, data);
+        }
+        else {
+          var requestUrl = "https://api.brewerydb.com/v2/beers?styleId=" + data.data.styleId + "&order=random&randomCount=3&key=" + beer.apiKEY + "";
+          microAjax(requestUrl, function(moreData) {
+            moreData = JSON.parse(moreData);
+            console.log(requestUrl)
+            templateSelection.templateSelect(template, {
+              "data": data.data,
+              "moreData" : moreData.data
+            });
+          })
+        }
       })
     },
+    
+
+
   };
-  
+
   var templateSelection = {
     templateSelect : function (route, context) {
       var main = document.querySelector("main");
@@ -82,9 +85,7 @@
       main.innerHTML = template(context);
 
       }
-  }
+  };
 
-  app.init();
-
-
+  launcher.init();
 })();
