@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
 	<link rel="stylesheet" href="static/css/style.css">
 </head>
@@ -19,7 +20,7 @@
 	</main>
 
 	<script id="waiting-template" type="text/x-handlebars-template">
-	<img src="static/img/ajax-loader.gif" height="16" width="16" alt="waiting..." class="waiting-gif" >
+	<img src="static/img/loader.gif" height="16" width="16" alt="waiting..." class="waiting-gif" >
 
 	</script>
 
@@ -28,7 +29,7 @@
 	
 	<ul>
 		{{#each data}}
-				<li><a href="#{{id}}">{{name}}</a></li>
+				<li><a href="#{{id}}" data-transition="slide">{{name}}</a></li>
 			
 		{{/each}}
 	</ul>
@@ -77,7 +78,7 @@
   			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
 	</script>
 
-    
+   	<script src="static/js/hammer.min.js" type="text/javascript"></script>
     <script src="static/js/underscore-min.js" type='text/javascript'></script>
     <script src="static/js/microajax.minified.js" type="text/javascript"></script>
     <script src="static/js/routie.min.js" type="text/javascript"></script>

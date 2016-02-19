@@ -39,9 +39,21 @@ nav ul li:hover {
 }
 main {
 	padding:1rem 4rem;
+	 transition: opacity .2s ease-in-out;
 }
-main img {
-	display:inline-block;
+main ul li {
+	list-style-image: url('../img/beer-bottle.png');
+}
+
+main ul li:hover {
+	list-style-image: url('../img/beer-bottle-full.png');
+}
+
+.fadeIn {
+	opacity: 1
+}
+.fadeOut {
+	opacity:0;
 }
 .waiting-gif {
 	position: absolute;
