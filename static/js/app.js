@@ -58,7 +58,7 @@ console.log("Start gestures")
       beer.request(requestUrl, template, true);
     },
     request : function (requestUrl, template, single) {
-      // 
+      templateSelection.templateSelect("waiting");
       console.log("request URL is " + requestUrl);
 
       microAjax(requestUrl, function(data) {
