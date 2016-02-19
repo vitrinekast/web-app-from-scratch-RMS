@@ -35,6 +35,7 @@ function microAjax(url, callbackFunction)
 			return new ActiveXObject('Microsoft.XMLHTTP');
 		else if (window.XMLHttpRequest)
 			return new XMLHttpRequest();
+		 
 		return false;
 	};
 
@@ -47,12 +48,17 @@ function microAjax(url, callbackFunction)
 	if(this.request) {
 		var req = this.request;
 		req.onreadystatechange = this.bindFunction(this.stateChange, this);
+		req.open("GET", url, true);
+		console.log(req.headers)
+		req.setRequestHeader("Access-Control-Allow-Origin", "*");
+		req.setRequestHeader('Content-type', 'application/jsonp');
 
 		if (this.postBody!=="") {
 			req.open("POST", url, true);
 			req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			req.setRequestHeader('Content-type', 'json');
+			req.setRequestHeader('Content-type', 'application/jsonp');
 			req.setRequestHeader('Connection', 'close');
+			
 		} else {
 			req.open("GET", url, true);
 		}

@@ -62,8 +62,14 @@ console.log("Start gestures")
       console.log("request URL is " + requestUrl);
 
       microAjax(requestUrl, function(data) {
+        var req = this.getRequest();
+        console.log(req);
+        // req.open("POST", requestUrl);
+        // req.setRequestHeader("Access-Control-Allow-Origin", "http://www.example.com");
         console.log("start request");
-        data = JSON.parse(data);
+
+
+        // data = JSON.parse(data);
         
         if(single === false) {
           console.log("false");
@@ -72,9 +78,9 @@ console.log("Start gestures")
         else {
           console.log("true");
           var requestUrl = "https://api.brewerydb.com/v2/beers?styleId=" + data.data.styleId + "&order=random&randomCount=3&key=" + beer.apiKEY + "";
+         
           microAjax(requestUrl, function(moreData) {
-            microAjax.setRequestHeader('X-PINGOTHER', 'pingpong');
-      microAjax.setRequestHeader('Content-Type', 'application/xml')
+            
             moreData = JSON.parse(moreData);
             console.log(requestUrl)
             templateSelection.templateSelect(template, {
