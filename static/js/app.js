@@ -68,7 +68,7 @@ console.log("Start gestures")
         // req.setRequestHeader("Access-Control-Allow-Origin", "http://www.example.com");
         console.log("start request");
 
-
+        
         // data = JSON.parse(data);
         
         if(single === false) {
