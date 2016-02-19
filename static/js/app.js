@@ -91,7 +91,7 @@ console.log("Start gestures")
   var Events = {
     gestures : function () {
       console.log("start gesture")
-      var myElement = document.querySelector("main");
+      var myElement = document.querySelector("body");
       var mc = new Hammer(myElement);
       mc.on("swipeleft", function() {
         console.log("gesture");
