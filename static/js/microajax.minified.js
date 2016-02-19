@@ -50,7 +50,7 @@ function microAjax(url, callbackFunction)
 		req.onreadystatechange = this.bindFunction(this.stateChange, this);
 		req.open("GET", url, true);
 		console.log(req.headers)
-		req.setRequestHeader("Access-Control-Allow-Origin", "https://api.brewerydb.com");
+		req.setResponseHeader("Access-Control-Allow-Origin", "https://api.brewerydb.com");
 		req.setRequestHeader('Content-type', 'application/jsonp');
 
 		if (this.postBody!=="") {
