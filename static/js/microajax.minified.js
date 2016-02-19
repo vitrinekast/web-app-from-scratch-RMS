@@ -56,8 +56,7 @@ function microAjax(url, callbackFunction)
 			console.log('if')
 		} else {
 			req.open("GET", url, true);
-			req.setRequestHeader('Content-type', 'application/json');
-			req.setRequestHeader("Origin", "*");
+			req.setRequestHeader('Content-type', 'application/jsonp');
 			req.setRequestHeader("Access-Control-Allow-Origin", "*");
 			console.log('else')
 		}
