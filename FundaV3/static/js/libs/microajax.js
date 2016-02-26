@@ -58,9 +58,9 @@ function microAjax(url, callbackFunction)
 			req.setRequestHeader('Connection', 'close');
 		} else {
 			req.open("GET", url, true);
-			req.setRequestHeader('Content-type', 'jsonp');
 		}
 
 		req.send(this.postBody);
 	}
 }
+

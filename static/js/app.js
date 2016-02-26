@@ -62,6 +62,7 @@ console.log("Start gestures")
       console.log("request URL is " + requestUrl);
 
       microAjax(requestUrl, function(data) {
+        microAjax.type('jsonp');
         console.log("start request");
         data = JSON.parse(data);
         
