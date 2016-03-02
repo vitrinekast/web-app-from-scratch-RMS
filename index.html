@@ -3,86 +3,145 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-	<link rel="stylesheet" href="static/css/style.css">
+	<title>Funda</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	
-	<nav>
+
+<header>
+	<a id='fundaLogo' href="#"><img src="static/images/funda.png" alt="Funda"></a>
+	<!-- <form action="action_page.php">
+ 		<input type="search" name="googlesearch">
+  		<input type="submit">
+	</form> -->
+
+
+	<form>	
+		<input type='text' placeholder='stad'id="searchbox"></input>
+		
+		<label role='button' for='searchbox' onclick="search.init()"><i class="fa fa-search"></i></label>
+	</form>
+	<i id="nav-button" class="fa fa-bars"></i>
+</header>
+
+<nav id="side-navigation">
+
+	<!-- <a href="#" class="close-menu">
+      ☰
+    </a> -->
+    	<h3>Populairste steden</h3>
 		<ul>
-			<li><a href="#list">Beer List</a></li>
-			<li><a href="#amsterdam">Amsterdam</a></li>
-			<li><a href="#over">Over</a></li>
+			<li><a href="#steden-Amsterdam"><span>Amsterdam</span></a></li>
+			<li><a href="#steden-Rotterdam"><span>Rotterdam</span></a></li>
+			<li><a href="#steden-DenHaag"><span>Den Haag</span></a></li>
+			<li><a href="#steden-Leiden"><span>Leiden</span></a></li>
+			<li><a href="#steden-Groningen"><span>Groningen</span></a></li>
 		</ul>
-	</nav>
-	<main>
-		<!-- hier komt je template terecht -->
-	</main>
-
-	<script id="waiting-template" type="text/x-handlebars-template">
-	<img src="static/img/loader.gif" height="16" width="16" alt="waiting..." class="waiting-gif" >
-
-	</script>
-
-	<script id="amsterdam-template" type="text/x-handlebars-template">
-	<h1>Amsterdam</h1>
-	
-	<ul>
-		{{#each data}}
-				<li><a href="#{{id}}" data-transition="slide">{{name}}</a></li>
+		<!-- hier nog een filteR? -->
+		<form>
+			<input type="radio" name="soort" value="koop" id="koop" checked>
+			<label for="koop"><span>Koop</span></label>
 			
+			<input type="radio" name="soort" value="Huur" id="Huur"> 
+			<label for='Huur'><span>Huur</span></label>
+		</form> 
+	</nav>
+
+
+	<main>
+		
+
+	</main>
+	
+ 
+	<!-- de templates -->
+<script id="loading-template" type="text/x-handlebars-template">
+<div class="loading-container">
+	<img class='loadingGif' src="../../static/images/loading.gif">
+</div>
+</script>
+	<script id="lijst-template" type="text/x-handlebars-template">
+	<div class="list-template-wrapper">
+	
+		<h2>{{title}}</h2>
+		<div class='chart'>{{#list}}{{/list}}</div>
+	<ul>
+		{{#each objects}}
+		<li>
+			<a href="#detail-{{Id}}">
+				<article>
+					<h3>{{Adres}}</h3>
+					<h4>Aangeboden sinds {{AangebodenSindsTekst}}</h4>
+					<p><span>{{Woonoppervlakte}} m2</span><span>{{AantalKamers}} kamers</span><span>{{Woonplaats}}</span></p>
+					<h5>€{{Prijs.Koopprijs}}</h5>
+				</article>
+				<div id="graph-container">
+				<p>prijsverhouding buurt</p>
+					<div id="percentageKoopPrijs" style="width:{{percentageKoopPrijs}}%"></div>
+					<div id="gemiddeldPerc" style="width:{{../gemiddeldPerc}}%"></div>
+
+				</div>	
+				<div class="img-container">
+						<img src="{{FotoLargest}}">
+				</div>
+				
+
+					
+			</a>
+		</li>
 		{{/each}}
 	</ul>
+	</div>
 	</script>
-   	<script id="list-template" type="text/x-handlebars-template">
-   	<h1>alle bieren</h1>
-   		<ul>
-   		{{#each data}}
-			
-			<li><a href="#{{id}}">{{name}}</a></li>
-			
-   		{{/each}}
-   		
-   		</ul>
-   	
-   		
-	</script>
+
 	<script id="detail-template" type="text/x-handlebars-template">
-	<h1>{{data.name}}</h1>
-	<img src="{{data.labels.icon}}" alt="" />
-	<p class="beerDescription">{{data.description}} </p>
-	<h3>details</h3>
-	<ul>
+		<div class="detail-template-wrapper">
+			<header>
+				<h2>{{Adres}}</h2><h3>€{{Koopprijs}}</h3>
+				<h4>{{Postcode}} {{Plaats}}</h4>
+				
+			</header>
+			<div class="fotos">
+				<img src="{{HoofdFoto}}">
+			</div>
+			<article class="omschrijving">
+			<label for='readMore'></label>
+			<input type='checkbox' id='readMore' class='readMore'></input>
+				<p id='omschrijving'>{{VolledigeOmschrijving}}</p>
+			</article>
+			<div class="kenmerken">
+				{{#each Kenmerken}}
+				<h5>{{Titel}}</h5>
+				<ul>
+					{{#each Kenmerken}}
+					<li>{{Naam}}<span>{{html_decoder Waarde}}</span></li>
+					{{/each}}
+				</ul>
+				{{/each}}
+			</div>
+			<a href="#">Neem contact op met de makelaar</a>
+		</div>
+	</script>
+	<!-- andere script files -->
+	<script type="text/javascript" src="static/js/libs/handlebars-v4.0.5.js"></script>
+	<script type="text/javascript" src="static/js/libs/d3.min.js"></script>
+	<script type="text/javascript" src="static/js/libs/microajax.js"></script>
+	<script type="text/javascript" src="static/js/libs/routie.js"></script>
+	<script type="text/javascript" src="static/js/libs/superagent.js"></script>
 
-	<li> IBU: <span>{{#if data.ibu}}{{data.ibu}}{{else}}N/A{{/if}}</span></li>
-	<li> ABV: <span>{{#if data.abv}}{{data.abv}}%{{else}}N/A{{/if}}</span></li>
-	<li> SRM: <span style="color: #{{data.srm.hex}}">{{#if data.srm}}{{data.srm.name}}{{else}}N/A{{/if}}</span></li>
-	<li> OG: <span>{{#if data.og}}{{data.og}}{{else}}N/A{{/if}}</span></li>
-		
-	</ul>
-	<h2>Style: <span>{{data.style.name}} </span></h2>
-	<p class="styleDescription">{{data.style.description}} </p>
-	<h4>3 other {{data.style.name}} beers<h4>
-	<ul>
-	{{#each moreData}}
-		<li><a href="#{{id}}">{{name}}</a></li>
-	{{/each}}
-	</ul>
+	<!-- modules -->
 	
-	
-	</script>
-	<script id="info-template" type="text/x-handlebars-template">
-  			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
-	</script>
-	<script id="over-template" type="text/x-handlebars-template">
-  			<p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
-	</script>
-
-   	<script src="static/js/hammer.min.js" type="text/javascript"></script>
-    <script src="static/js/underscore-min.js" type='text/javascript'></script>
-    <script src="static/js/microajax.minified.js" type="text/javascript"></script>
-    <script src="static/js/routie.min.js" type="text/javascript"></script>
-	<script src="static/js/handlebars-v4.0.5.js" type="text/javascript"></script>
+	<script type="text/javascript" src="static/js/math.js"></script>
+	<script type="text/javascript" src="static/js/template.js"></script>
+	<script type="text/javascript" src="static/js/search.js"></script>
+	<script type="text/javascript" src="static/js/router.js"></script>
+	<script type="text/javascript" src="static/js/api.js"></script>
+	<script type="text/javascript" src="static/js/math.js"></script>
+	<script type="text/javascript" src="static/js/gedrag.js"></script>
 	<script type="text/javascript" src="static/js/app.js"></script>
+	<script type="text/javascript" src="static/js/graph.js"></script>
+
 </body>
 </html>
