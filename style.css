@@ -1,13 +1,7 @@
 body {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e7f1f5+0,e7f1f5+100,ffffff+100 */
   background: #e7f1f5;
-  /* Old browsers */
-  /* FF3.6-15 */
-  /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(45deg, #e7f1f5 0%, #e7f1f5 100%, #ffffff 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7f1f5', endColorstr='#ffffff',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
   background-size: contain;
   font-family: 'Oxygen', sans-serif;
   margin: 0;
@@ -102,16 +96,9 @@ body > header #nav-button {
 }
 
 nav {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2cb4ea+0,6ec8e5+100 */
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00a6e8+0,6ec8e5+100 */
   background: #00a6e8;
-  /* Old browsers */
-  /* FF3.6-15 */
-  /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(45deg, #00a6e8 0%, #6ec8e5 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a6e8', endColorstr='#6ec8e5',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
   position: fixed;
   top: 0;
   height: 100%;
@@ -376,6 +363,7 @@ nav form label span {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  flex-wrap:nowrap;
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
